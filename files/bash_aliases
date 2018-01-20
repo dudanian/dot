@@ -1,0 +1,6 @@
+alias gg='git grep'
+alias ggrep='git grep --no-index'
+
+alias diff='git diff --no-index'
+
+alias restart='echo no'
