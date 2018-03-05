@@ -1,6 +1,24 @@
-alias gg='git grep'
+# git replacements for std things
 alias ggrep='git grep --no-index'
-
 alias diff='git diff --no-index'
 
+# don't restart using cli
 alias restart='echo no'
+
+# git aliases
+alias gg='git grep'
+alias gcp='git cherry-pick'
+alias gcpc='git cherry-pick --continue'
+alias gri='git rebase -i'
+alias grc='git rebase --continue'
+
+# git update master
+gum() {
+  ORIGIN=${1:-origin}
+  git fetch ${ORIGIN} master:master
+}
+
+# git rebase master (after update)
+grm() {
+  gum ${1} && git rebase master
+}
