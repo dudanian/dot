@@ -1,26 +1,11 @@
 # git replacements for std things
 alias diff='git diff --no-index'
-alias ggrep='git grep --no-index'
 
 # don't restart using cli
 alias restart='echo no'
 
-# git aliases
-alias gg='git grep'
-alias gadd='git add -u .'
-alias gstatus='git status'
-alias gbranch='git branch'
-alias gstash='git stash'
-alias gcstash='git add -u && git commit -m "temp"'
-alias glog='git log --stat'
-
-# git things
-alias gdiff='git diff'
-alias gstat='git diff --stat'
-alias gcached='git diff --cached'
-alias gamend='git commit --amend'
-
 # git long commands
+alias gg='git grep'
 alias gcp='git cherry-pick'
 alias gcpc='git cherry-pick --continue'
 alias gcpa='git cherry-pick --abort'
@@ -32,11 +17,14 @@ alias gra='git rebase --abort'
 # git-update-master - fast-forward updates master branch
 alias gum='git fetch origin master:master'
 # git-rebase-master - rebases current branch on remote master
-alias grm='gum && git rebase'
+alias grm='git rebase master'
+# git-update-rebase-master - update and rebase master
+alias gurm='gum && grm'
 
-# git-branch-master
-gbm() {
-  if [ -z "$1" ]; then echo "No branch name" && return 1; fi
-  BRANCH=${1}
-  gum && git checkout -b ${BRANCH} -t ${REMOTE}/master
+rg() {
+  if [ -t 1 ] ; then
+    command rg -p "$@" | less -RFX
+  else
+    command rg "$@"
+  fi
 }
